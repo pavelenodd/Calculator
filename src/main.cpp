@@ -1,20 +1,21 @@
 #include <iostream>
 #include <string>
 
-#include "libs/nlohmann/json.hpp"
+#include "headers/json_parser.h"
+
 using namespace std;
-using json = nlohmann::json;
 
-class JsonParser {
- private:
-  const string file_adress_;
-  json json_file_;
-
- public:
-  JsonParser(const string& s) : file_adress_(s) { cout << "test"; };
-  void Test() { cout << file_adress_ << endl; }
-};
 int main() {
-  JsonParser json_parser("src\\init\\init.json");
-  json_parser.Test();
+  setlocale(LC_ALL, "");
+  string input_data;
+  JsonParser json_parser(
+      "E:\\Projects\\CPP_Projects\\Calculator\\src\\init\\init.json");
+  cout << json_parser.GetDescription() << endl;
+  cin >> input_data;
+  while (true) {
+    if (input_data == "q" || input_data == "Q") {
+      break;
+    }
+    // json_parser.
+  }
 }
