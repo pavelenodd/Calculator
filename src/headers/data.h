@@ -1,3 +1,4 @@
+#pragma once
 #include <string>
 
 using namespace std;
@@ -15,7 +16,7 @@ struct Data {
   float coins;
   float banc_card;
   float client_card;
-  float mibile_aplicat;
+  float mobile_aplicat;
   float change;
   float ammount;
   float sold_water;
