@@ -1,7 +1,11 @@
+#include <windows.h>
+
 #include <iostream>
+#include <map>
 #include <string>
 
 #include "headers/csv_parser.h"
+#include "headers/data.h"
 #include "headers/json_parser.h"
 
 using namespace std;
@@ -14,8 +18,12 @@ enum ComandAdressSwicer {
 enum ComandDataSwitcher {
   GET_ALL = 0,
 };
+
 int main() {
-  setlocale(LC_ALL, "");
+  // Установить кодировку консоли на UTF-8
+  SetConsoleOutputCP(CP_UTF8);
+
+  setlocale(LC_ALL, "en_US.UTF-8");
 
   int inpt_adrr_cmd;  // команда для получения адреса
   int inpt_data_cmd;  // команда для получения информации
@@ -35,11 +43,26 @@ int main() {
       break;
     }
   }*/
+  map<string, Data> cash;
   switch (inpt_adrr_cmd) {
     case ComandAdressSwicer::ALL:
       switch (inpt_data_cmd) {
         case ComandDataSwitcher::GET_ALL:
-          cout << csv_parser.Get_Info(ALL, GET_ALL) << endl;
+
+          cash = csv_parser.Get_Info(inpt_adrr_cmd, inpt_data_cmd);
+          for (const auto &i : cash) {
+            cout << "адресс аппарата: " << i.first << '\n'
+                 << "проданно на сумму: \t\t" << i.second.ammount << '\n'
+                 << "оплачено банк.картой: \t\t" << i.second.banc_card << '\n'
+                 << "оплачено купюрами: \t\t" << i.second.bills << '\n'
+                 << "выплачено сдачи: \t\t" << i.second.change << '\n'
+                 << "оплачено клиетн.картой: \t" << i.second.client_card << '\n'
+                 << "оплачено монетами: \t\t" << i.second.coins << '\n'
+                 << "оплачено моб.приложением: \t" << i.second.mobile_aplicat
+                 << '\n'
+                 << "проданно воды: \t\t\t" << i.second.sold_water << "\n\n";
+          }
+
           break;
 
         default:

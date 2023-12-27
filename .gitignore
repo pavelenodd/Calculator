@@ -31,5 +31,9 @@
 *.out
 *.app
 #folders
-.vscode
 test
+build
+#files
+settings.json
+tasks.json
+launch.json

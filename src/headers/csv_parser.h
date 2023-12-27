@@ -9,14 +9,14 @@
 using namespace std;
 enum ComandSwitcher {
   ADRESS = 1,           // адресс
-  DATE = 3,             // день
+  DATA_DATE = 3,        // день
   BILLS = 4,            // купюрами
   COINS = 5,            // монетами
   BANC_CARD = 6,        // банк.картой
   CLIENT_CARD = 7,      // клиентской картой
   MOBILE_APPLICAT = 8,  // моб приложентием
   CHANGE = 9,           // сдача
-  AMMOUNT = 10,         // итого
+  AMMOUNT = 10,         // проданно на сумму
   SOLD_WATER = 11,      // проданно воды
 
 };
@@ -52,8 +52,8 @@ class CSV_Parser {
               cash.clear();
               ++collum;
               break;
-            case DATE:
-              /* code */
+            case DATA_DATE:
+              /* будет позже  */
               cash.clear();
               ++collum;
               break;
@@ -123,28 +123,35 @@ class CSV_Parser {
     }
     Parse_CSV();
   }
-  string Get_Info(const int comand_adress, const int comand_info) const {
+  map<string, Data> Get_Info(const int comand_adress, const int comand_info) {
+    // нужен для получения информации из data_arr_
     const map<int, string> L_comand_adress_switch{
         {0, "all"},
         {1, "г Гатчина, ул Генерала Кныша, д 15"},
         {2, "г Гатчина, ул Новоселов, д 7"},
         {3, "г Гатчина, ул Авиатриссы Зверевой, д 3"}};
     const string comand = L_comand_adress_switch.at(comand_adress);
-    string out;
+    map<string, Data> result{
+        {"г Гатчина, ул Генерала Кныша, д 15", Data{}},
+        {"г Гатчина, ул Новоселов, д 7", Data{}},
+        {"г Гатчина, ул Авиатриссы Зверевой, д 3", Data{}}};
+    if (data_arr_.empty()) {
+      cerr << "файл пуст" << endl;
+      abort();
+    }
     if (comand == "all") {
-      for (Data L_data : data_arr_) {
-        out += L_data.adress;
-        out.push_back('\n');
-      }
-    } else {
-      for (Data L_data : data_arr_) {
-        if (L_data.adress == comand) {
-          out += L_data.adress;
-          out.push_back('\n');
-        }
+      for (const auto& L_data : data_arr_) {
+        result.at(L_data.adress).ammount += L_data.ammount;
+        result.at(L_data.adress).banc_card += L_data.banc_card;
+        result.at(L_data.adress).bills += L_data.bills;
+        result.at(L_data.adress).change += L_data.change;
+        result.at(L_data.adress).client_card += L_data.client_card;
+        result.at(L_data.adress).coins += L_data.coins;
+        result.at(L_data.adress).mobile_aplicat += L_data.mobile_aplicat;
+        result.at(L_data.adress).sold_water += L_data.sold_water;
       }
     }
 
-    return out;
+    return result;
   }
 };
