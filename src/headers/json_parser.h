@@ -11,6 +11,7 @@ class JsonParser {
  private:
   ifstream curr_file_;
   const string file_adress_;
+  json json_file_;
 
   void OpenFile(const string& file_adress) {
     curr_file_.open(file_adress);
@@ -24,6 +25,7 @@ class JsonParser {
  public:
   JsonParser(const string& L_file_adress) : file_adress_(L_file_adress) {
     OpenFile(file_adress_);
+    curr_file_ >> json_file_;
   };
   ~JsonParser() {
     if (curr_file_.is_open()) {
@@ -31,10 +33,8 @@ class JsonParser {
     }
   };
 
-  string GetDescription() {
-    json json_file;
-    curr_file_ >> json_file;
-    vector<string> cash = json_file["description"];
+  string GetDescription(const string& description_query) {
+    vector<string> cash = json_file_[description_query];
     string out;
     for (string str : cash) {
       out += str;

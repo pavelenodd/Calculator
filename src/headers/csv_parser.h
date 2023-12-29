@@ -7,22 +7,22 @@
 
 #include "data.h"
 using namespace std;
-enum ComandSwitcher {
-  ADRESS = 1,           // адресс
-  DATA_DATE = 3,        // день
-  BILLS = 4,            // купюрами
-  COINS = 5,            // монетами
-  BANC_CARD = 6,        // банк.картой
-  CLIENT_CARD = 7,      // клиентской картой
-  MOBILE_APPLICAT = 8,  // моб приложентием
-  CHANGE = 9,           // сдача
-  AMMOUNT = 10,         // проданно на сумму
-  SOLD_WATER = 11,      // проданно воды
-
-};
 
 class CSV_Parser {
  private:
+  enum ComandSwitcher {
+    ADRESS = 1,           // адресс
+    DATA_DATE = 3,        // день
+    BILLS = 4,            // купюрами
+    COINS = 5,            // монетами
+    BANC_CARD = 6,        // банк.картой
+    CLIENT_CARD = 7,      // клиентской картой
+    MOBILE_APPLICAT = 8,  // моб приложентием
+    CHANGE = 9,           // сдача
+    AMMOUNT = 10,         // проданно на сумму
+    SOLD_WATER = 11,      // проданно воды
+
+  };
   ifstream file_;
   vector<Data> data_arr_;
   void OpenFile(const string& file_adress) {
