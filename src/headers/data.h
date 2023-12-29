@@ -10,14 +10,14 @@ struct Day {
   int minutes;
 };
 struct Data {
-  string adress;         // адресс аппарата
-  Day day;               // день продажи воды
-  float bills;           // оплачено купюрами
-  float coins;           // оплачено монетами
-  float banc_card;       // оплачено банк.картой
-  float client_card;     // оплачено клиетн.картой
-  float mobile_aplicat;  // оплачено моб.приложением
-  float change;          // выплачено сдачи
-  float ammount;         // проданно на сумму
-  float sold_water;      // проданно воды
+  string adress;             // адресс аппарата
+  Day day;                   // день продажи воды
+  float bills = 0;           // оплачено купюрами
+  float coins = 0;           // оплачено монетами
+  float banc_card = 0;       // оплачено банк.картой
+  float client_card = 0;     // оплачено клиетн.картой
+  float mobile_aplicat = 0;  // оплачено моб.приложением
+  float change = 0;          // выплачено сдачи
+  float ammount = 0;         // проданно на сумму
+  float sold_water = 0;      // проданно воды
 };

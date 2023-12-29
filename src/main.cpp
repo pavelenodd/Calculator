@@ -51,13 +51,16 @@ int main() {
   cin >> inpt_data_cmd;
   //
   CSV_Parser csv_parser(
-      "E:\\Projects\\CPP_Projects\\Calculator\\test\\test.csv");
+      "E:\\Projects\\CPP_Projects\\Calculator\\test\\Bobrovskiy_sales-2022.12."
+      "31-2023.12.31_1703853297603.csv");
   csv_parser.AddData();
 
   map<string, Data> cash;
   switch (inpt_adrr_cmd) {
     case ComandAdressSwicer::ALL_ADRESS:
       switch (inpt_data_cmd) {
+        /*добавить итоговое значение по полученным данным , добавить
+         * форматировщик для вывода в банковоском стиле */
         case ComandDataSwitcher::ALL_DATA:
           cash = csv_parser.Get_Info(inpt_adrr_cmd, inpt_data_cmd);
           ClearScreen();
@@ -77,7 +80,7 @@ int main() {
                  << '\n'
                  << "оплачено моб.приложением: \t" << i.second.mobile_aplicat
                  << " руб." << '\n'
-                 << "проданно воды: \t\t\t" << i.second.sold_water << "литров "
+                 << "проданно воды: \t\t\t" << i.second.sold_water << " литров "
                  << "\n\n";
           }
           break;
@@ -86,7 +89,7 @@ int main() {
           ClearScreen();
           for (const auto &i : cash) {
             cout << "адресс аппарата: " << i.first << '\n'
-                 << "проданно воды: \t\t\t" << i.second.sold_water << "литров "
+                 << "проданно воды: \t\t\t" << i.second.sold_water << " литров "
                  << "\n\n";
           }
           break;
@@ -169,7 +172,7 @@ int main() {
       cerr << "Неизвестная команда" << endl;
       break;
   }
-  Sleep(5000000);
+  // Sleep(5000000); //пока отключен
 
   return 0;
 }

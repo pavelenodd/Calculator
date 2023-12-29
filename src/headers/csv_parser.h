@@ -45,7 +45,14 @@ class CSV_Parser {
       for (int i = 0; line.size() > i; ++i) {
         cash.push_back(line[i]);
         if (line[i + 1] == ';') {
-          i += 2;
+          if (cash != ";" || cash.size() > 1) {
+            if (cash[0] == ';') {
+              cash.erase(0, 1);
+            }
+            if (cash[cash.size() - 1] == ';') {
+              cash.pop_back();
+            }
+          }
           switch (collum) {
             case ADRESS:
               L_data.adress = cash;

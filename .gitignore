@@ -37,3 +37,4 @@ build
 settings.json
 tasks.json
 launch.json
+*.csv
