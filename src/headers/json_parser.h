@@ -23,7 +23,7 @@ class JsonParser {
   }
 
  public:
-  JsonParser(const string& L_file_adress) : file_adress_(L_file_adress) {
+  JsonParser(const string& L_file_adress) : file_adress_{L_file_adress} {
     OpenFile(file_adress_);
     curr_file_ >> json_file_;
   };

@@ -10,29 +10,20 @@ using namespace std;
 
 class CSV_Parser {
  private:
-  enum ComandSwitcher {
-    ADRESS = 1,           // адресс
-    DATA_DATE = 3,        // день
-    BILLS = 4,            // купюрами
-    COINS = 5,            // монетами
-    BANC_CARD = 6,        // банк.картой
-    CLIENT_CARD = 7,      // клиентской картой
-    MOBILE_APPLICAT = 8,  // моб приложентием
-    CHANGE = 9,           // сдача
-    AMMOUNT = 10,         // проданно на сумму
-    SOLD_WATER = 11,      // проданно воды
-
-  };
   ifstream file_;
   vector<Data> data_arr_;
-  void OpenFile(const string& file_adress) {
+
+  bool OpenFile(const string& file_adress) {
     file_.open(file_adress);
     if (!file_.is_open()) {
       cerr << "CSV File Not Open" << endl;
+      return false;
     } else {
       cerr << "CSV File Enabled" << endl;
+      return true;
     }
   }
+  void ProcessColumnData() {}
   void Parse_CSV() {
     string line;
     getline(file_, line);  // пропуск первой строки
@@ -118,7 +109,11 @@ class CSV_Parser {
   }
 
  public:
-  CSV_Parser(const string& file_adress) { OpenFile(file_adress); };
+  CSV_Parser(const string& file_adress) {
+    if (!OpenFile(file_adress)) {
+      abort();
+    }
+  };
   ~CSV_Parser() {
     if (file_.is_open()) {
       file_.close();

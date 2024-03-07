@@ -10,22 +10,7 @@
 #include "headers/json_parser.h"
 
 using namespace std;
-enum ComandAdressSwicer {
-  ALL_ADRESS = 0,   // все адреса
-  KNISHA_15 = 1,    // Генерала Кныша, д 15
-  NOVOSELOV_7 = 2,  // Новоселов, д 7
-  ZVEREVOI_3 = 3,   // ул Зверевой, д 3
-};
-enum ComandDataSwitcher {
-  ALL_DATA = 0,         // все данные
-  SOLD_WATER = 1,       // проданно воды
-  AMMOUNT = 2,          // проданно на сумму
-  BILLS = 3,            // купюрами
-  COINS = 4,            // монетами
-  BANC_CARD = 5,        // банк.картой
-  CLIENT_CARD = 6,      // клиентской картой
-  MOBILE_APPLICAT = 7,  // моб приложентием
-};
+
 void ClearScreen() {
 #if defined(_WIN32) || defined(_WIN64)
   system("cls");
@@ -43,16 +28,14 @@ int main() {
   int inpt_data_cmd;  // команда для получения информации
 
   JsonParser json_parser(
-      "E:\\Projects\\CPP_Projects\\Calculator\\src\\init\\init.json");
+      "E:/Projects/LernProjects/Calculator/src/init/init.json");
   cout << json_parser.GetDescription("description_to_adress_comand");
   cin >> inpt_adrr_cmd;
 
   cout << json_parser.GetDescription("description_to_DATA_comand");
   cin >> inpt_data_cmd;
   //
-  CSV_Parser csv_parser(
-      "E:\\Projects\\CPP_Projects\\Calculator\\test\\Bobrovskiy_sales-2022.12."
-      "31-2023.12.31_1703853297603.csv");
+  CSV_Parser csv_parser("E:/Projects/LernProjects/Calculator/test/test.csv");
   csv_parser.AddData();
 
   map<string, Data> cash;
